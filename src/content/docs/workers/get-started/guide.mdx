@@ -205,3 +205,12 @@ To do more:
 - Set up [bindings](/workers/runtime-apis/bindings/) to allow your Worker to interact with other resources and unlock new functionality.
 - Learn how to [test and debug](/workers/testing/) your Workers.
 - Read about [Workers limits and pricing](/workers/platform/).
+addEventListener('fetch', event => {
+  const urlA = 'https://example.com/a';
+  const urlB = 'https://example.com/b';
+  const ratio = 0.5; // A/B 分流比例，0.5 = 50%
+
+  const target = Math.random() < ratio ? urlA : urlB;
+  event.respondWith(Response.redirect(target, 302));
+});
+
